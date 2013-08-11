@@ -1,0 +1,27 @@
+# Base Regular Expression types to be used with patterns
+
+Time:
+  Greg Burns: # This is the author of the expression
+                  # I name the expression after him to give him credit
+                  # (It's also difficult to come up with unique names for expressions).
+
+                  # Whitespace is ignored, Currently Regexs are run case insensitive
+        Expression: |
+            ([0-9]|[1][0-2]) \s? (am|pm)
+        Description: >
+            Simple hour and am/pm time.
+        Matches:
+            8am | 8 am
+        Non-Matches:
+            8a | 8 a | 8:00 am
+        Groups:
+          - Hour
+          - AMPM
+
+Color:
+    Basic Color:
+        Expression: (Orange|Green)
+        Matches: Orange | Green
+        Non-Matches: Blue
+        Groups:
+          - Color
