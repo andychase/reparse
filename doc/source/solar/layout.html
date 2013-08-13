@@ -1,0 +1,20 @@
+{% extends "basic/layout.html" %}
+
+{%- block doctype -%}
+<!DOCTYPE html>
+{%- endblock -%}
+
+{%- block extrahead -%}
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Strait' rel='stylesheet' type='text/css'>
+<link href="{{ pathto("_static/solarized-dark.css", 1) }}" rel="stylesheet">
+{%- endblock -%}
+
+{# put the sidebar before the body #}
+{% block sidebar1 %}{{ sidebar() }}{% endblock %}
+{% block sidebar2 %}{% endblock %}
+
+{%- block footer %}
+{%- endblock %}
+{%- block relbar2  %}
+
+{%- endblock %}
