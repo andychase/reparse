@@ -1,30 +1,32 @@
 RE\|PARSE
 =========
 
-*Sane Regular Expression based parsers*
+*Python library/tools for combining and using Regular Expressions in a maintainable way*
 
 |Build Status|
 
-Basically this library allows you to - build a database of Regular
-Expressions in Yaml, - combine them together using Patterns - backed by
-Python functions that build your output in the way that you want it.
+This library also allows you to:
+
+- Maintain a database of Regular Expressions
+- Combine them together using Patterns
+- Search, Parse and Output data matched by combined Regex using Python functions.
 
 A Taste / Getting Started
 =========================
 
-(See the demo/ directory for more detail)
+(See the examples/ directory for more details)
 
 I want to parse this
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 ::
 
      blah blah blah go to the store to buy green at 11pm! blah blah
 
 Expressions written in Yaml
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
-.. code:: yaml
+.. code-block:: yaml
 
     Color:
         Basic Color:
@@ -36,19 +38,17 @@ Expressions written in Yaml
 
     Time:
         Basic Time:
-            Expression: ([0-4]{2}):([[0-6][0-9])(am|pm)?
-            Matches: 8:05pm | 0:00
-            Non-Matches: 13:72
-            Non-Matches: Blue
+            Expression: ([0-9]|[1][0-2]) \s? (am|pm)
+            Matches: 8am | 8 am
+            Non-Matches: 8a | 8 a | 8:00 am
             Groups:
               - Hour
-              - Minute
-              - Period
+              - AMPM
 
 Patterns written in Yaml
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
-.. code:: yaml
+.. code-block:: yaml
 
     BasicColorTime:
       Order: 1
@@ -56,9 +56,9 @@ Patterns written in Yaml
         <Color> (?: \s? at \s? )? <Time>
 
 Functions written in Python
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
-.. code:: python
+.. code-block:: python
 
     from datetime import time
     def color_time(Color=None, Time=None):
@@ -70,26 +70,30 @@ Functions written in Python
         return Color, Time
 
 Result
-~~~~~~
+------
 
-.. code:: python
+.. code-block:: python
 
     [('green', datetime.time(23, 0))]
 
+
+Info
+====
+
 Support
-=======
+-------
 
 Need some help? Make issues on Github or send me an email at
 andy@asperous.us and I'll do my best to help you.
 
 Contribution
-============
+------------
 
 Send me suggestions, issues, and pull requests on Github and I'll gladly
 review them!
 
 Licence
-=======
+-------
 
 The MIT License (MIT)
 
