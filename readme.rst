@@ -3,7 +3,7 @@ RE\|PARSE
 
 *Python library/tools for combining and using Regular Expressions in a maintainable way*
 
-|Build Status|
+[|Build Status| `Download/View Source on Github`_] [`Docs at ReadtheDocs`_]
 
 This library also allows you to:
 
@@ -120,3 +120,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 .. |Build Status| image:: https://travis-ci.org/asperous/reparse.png?branch=master
    :target: https://travis-ci.org/asperous/reparse
+
+.. _Download/View Source on Github: https://github.com/asperous/reparse
+
+.. _Docs at Readthedocs: https://reparse.readthedocs.org/en/latest/

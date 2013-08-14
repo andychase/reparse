@@ -369,3 +369,9 @@ h2
     display: none;
 }
 
+#re-parse .external img
+{
+    position: relative;
+    top: 5px;
+    margin: 0 3px;
+}
