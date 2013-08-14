@@ -5,10 +5,11 @@ contains the 'Expression', 'Matches', & 'Non-Matches' fields.
 
 It also runs the fields against the expression to make sure they are valid.
 
-It is intended to be used against a unit testing_framework that
+It is intended to be used against a ``testing_framework`` that
 contains assertIn, assertTrue, assertFalse (such as unittest).
 
-Example Usage:
+Example Usage::
+
     from reparse.expression_tester import expression_tester
     import unittest
 

@@ -1,14 +1,24 @@
 """
-    RE|PARSE Building Blocks
+RE|PARSE's Regex Building Blocks
 
-    This module handles building regex bits and grouping them together.
-    The magic here is that expressions can be grouped as much as memory allows.
 
+This module handles building regex bits and grouping them together.
+The magic here is that expressions can be grouped as much as memory allows.
 """
 import regex
 
 
 class Expression:
+    """ Expression is the fundamental unit of EX|PARSE.
+
+    It contains:
+
+    - The finalized regex,
+    - the compiled regex (lazily compiled on the first run),
+    - Group lengths, functions and names,
+    - and the output ``final_function``
+
+    """
     regex = ""
     compiled = ""
     group_lengths = []
@@ -24,6 +34,8 @@ class Expression:
         self.name = name
 
     def findall(self, string):
+        """ Parse argument string
+        """
         if self.compiled == "":
             self.compiled = regex.compile(self.regex, regex.VERBOSE | regex.IGNORECASE)
         matches = self.compiled.findall(string)
@@ -37,6 +49,10 @@ class Expression:
         return output
 
     def run(self, matches):
+        """
+        Given matches, which is the output of this class's regex
+        execute functions & parse.
+        """
         j = 0
         results = []
         for i in range(0, len(self.group_functions)):
@@ -48,6 +64,8 @@ class Expression:
 
 
 def AlternatesGroup(expressions, final_function, name=""):
+    """ Group expressions using the OR regex (``|``)
+    """
     inbetweens = ["|"] * (len(expressions) + 1)
     inbetweens[0] = ""
     inbetweens[-1] = ""
@@ -55,6 +73,8 @@ def AlternatesGroup(expressions, final_function, name=""):
 
 
 def Group(expressions, final_function, inbetweens, name=""):
+    """ Group expressions together with ``inbetweens`` and with the output of a ``final_functions``.
+    """
     lengths = []
     functions = []
     regex = ""
