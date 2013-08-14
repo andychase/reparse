@@ -94,6 +94,37 @@ Want to read more about what RE|PARSE is and what it can do? More info in `About
 Info
 ====
 
+.. _installation-howto:
+
+Installation
+------------
+
+pip
+~~~~
+.. code-block:: python
+
+    pip install reparse
+
+manually
+~~~~~~~~
+
+1. If you don't have them already,
+   RE|PARSE depends on REGEX_, and PyYaml_.
+   Download those and ``python setup.py install`` in their directories.
+   If you are on windows, you may have to find binary installers for these, since they
+   contain modules that have to be compiled.
+
+2. Download the `Zip off of Github`_ (or clone the repo).
+
+3. Extract and do ``python setup.py install`` in the reparse containing the setup.py file directory.
+   You can also just have the reparse/reparse directory in the source tree
+   of your project if you don't want to install it.
+
+4. Test with ``python -c "import reparse"``,
+   no output means it is probably installed.
+   If you get ``ImportError: No module named reparse``
+   then you might want to recheck your steps.
+
 Support
 -------
 
@@ -143,3 +174,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 .. _`Howto: How to use RE|PARSE`: https://reparse.readthedocs.org/en/latest/howto.html
 
 .. _`About: Why another tool for parsing?`: https://reparse.readthedocs.org/en/latest/about.html
+
+.. _`REGEX`: https://pypi.python.org/pypi/regex
+
+.. _`PyYaml`: https://pypi.python.org/pypi/PyYAML
+
+.. _`Zip off of Github`: https://github.com/asperous/reparse/archive/master.zip

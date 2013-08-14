@@ -1,0 +1,9 @@
+Basic Phone:
+    Pattern: <Phone>
+    Order: 1
+
+Fax Phone:
+    Pattern: |
+      Fax: \s <Phone>
+    Order: 2
+    # I could have used <Basic Phone> instead to use a pattern inside a pattern but it wouldn't have made a difference really (just an extra function call).
