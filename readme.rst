@@ -11,20 +11,27 @@ This library also allows you to:
 - Combine them together using Patterns
 - Search, Parse and Output data matched by combined Regex using Python functions.
 
+If you know Regular Expressions already, this library basically just
+gives you a way to combine them together and hook them up to some callback functions in Python.
+
 A Taste / Getting Started
 =========================
 
-(See the examples/ directory for more details)
+(See the examples/ directory for a full code example)
 
-I want to parse this
---------------------
+Say your fashionista friend must know what colors their friends like at certain times.
+Luckily for you two, your friend's friends are blogging fanatics and you have downloaded thousands
+of text documents containing their every thought.
 
-::
+So you want to get (color and time) or ``[('green', datetime.time(23, 0))]`` out of text like::
 
      blah blah blah go to the store to buy green at 11pm! blah blah
 
-Expressions written in Yaml
----------------------------
+If you need scan/search/parse/transform some unstructured input and get some semi-structured data
+out of it RE|PARSE might be able to help.
+
+First structure some Regular Expressions (Here, in Yaml)
+--------------------------------------------------------
 
 .. code-block:: yaml
 
@@ -39,14 +46,14 @@ Expressions written in Yaml
     Time:
         Basic Time:
             Expression: ([0-9]|[1][0-2]) \s? (am|pm)
-            Matches: 8am | 8 am
-            Non-Matches: 8a | 8 a | 8:00 am
+            Matches: 8am | 3 pm
+            Non-Matches: 8a | 8:00 am | 13pm
             Groups:
               - Hour
               - AMPM
 
-Patterns written in Yaml
-------------------------
+Then structure some Patterns with those expressions (Yaml)
+----------------------------------------------------------
 
 .. code-block:: yaml
 
@@ -54,8 +61,10 @@ Patterns written in Yaml
       Order: 1
       Pattern: |
         <Color> (?: \s? at \s? )? <Time>
+      # The stuff in angle brackets detonate expression groups.
+      # Multiple expressions in one group are combined together.
 
-Functions written in Python
+Some callback functions (in Python)
 ---------------------------
 
 .. code-block:: python
@@ -76,6 +85,11 @@ Result
 
     [('green', datetime.time(23, 0))]
 
+Cool!
+
+Intrigued? Learn more how to make the magic happen in `Howto: How to use RE|PARSE`_.
+
+Want to read more about what RE|PARSE is and what it can do? More info in `About: Why another tool for parsing?`_
 
 Info
 ====
@@ -83,14 +97,13 @@ Info
 Support
 -------
 
-Need some help? Make issues on Github or send me an email at
-andy@asperous.us and I'll do my best to help you.
+Need some help? Send me an email at andy@asperous.us and I'll do my best to help you.
 
 Contribution
 ------------
 
-Send me suggestions, issues, and pull requests on Github and I'll gladly
-review them!
+The code is located on Github_.
+Send me suggestions, issues, and pull requests and I'll gladly review them!
 
 Licence
 -------
@@ -123,4 +136,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 .. _Download/View Source on Github: https://github.com/asperous/reparse
 
+.. _Github: https://github.com/asperous/reparse
+
 .. _Docs at Readthedocs: https://reparse.readthedocs.org/en/latest/
+
+.. _`Howto: How to use RE|PARSE`: https://reparse.readthedocs.org/en/latest/howto.html
+
+.. _`About: Why another tool for parsing?`: https://reparse.readthedocs.org/en/latest/about.html
