@@ -68,7 +68,7 @@ in many, many files. This is just how I organize my parsing resources.
         Senthil Gunabalan: # <- This is the expression
                            # I use the authors name because I couldn't be asked to come up with names for all of them myself
             Expression: |
-                ([+][0-9] \d{2}) - (\d{3}) - (\d{4})
+                [+]([0-9] \d{2}) - (\d{3}) - (\d{4})
             # Whitespace is ignored, so you can use it to make your regexs readable
             Description: This is a basic telephone number validation [...]
             Matches: +974-584-5656 | +000-000-0000 | +323-343-3453
@@ -153,7 +153,6 @@ The order in which the functions are run and results passed are as follows:
 
 
     def senthill(AreaCode, Prefix, Body):
-        AreaCode = AreaCode[1:]  # Remove + at beginning
         return Phone(area_code=AreaCode, prefix=Prefix, body=Body, fax=False)
 
 

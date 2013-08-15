@@ -3,7 +3,6 @@ Phone = namedtuple('phone', 'area_code prefix body fax')
 
 
 def senthill(AreaCode, Prefix, Body):
-    AreaCode = AreaCode[1:]  # Remove + at beginning
     return Phone(area_code=AreaCode, prefix=Prefix, body=Body, fax=False)
 
 

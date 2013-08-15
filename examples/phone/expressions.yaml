@@ -3,7 +3,7 @@ Phone: # <- This is the expression group name, it's like the 'type' of regex
     Senthil Gunabalan: # <- This is the expression
                        # I use the authors name because I couldn't be asked to come up with names for all of them myself
         Expression: |
-            ([+][0-9] \d{2}) - (\d{3}) - (\d{4})
+            [+]([0-9] \d{2}) - (\d{3}) - (\d{4})
         # Whitespace is ignored, use it to make your regexs readable
         Description: This is a basic telephone number validation [...]
         Matches: +974-584-5656 | +000-000-0000 | +323-343-3453
