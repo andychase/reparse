@@ -49,7 +49,7 @@ Why Regular Expressions
 
 PyParsing (Python) and Parboiled (JVM) also have use-cases very similar
 to RE|PARSE, and they are much more feature-filled. They have their own (much more powerful)
- DSL for parsing text.
+DSL for parsing text.
 
 RE|PARSE uses Regular Expressions which has some advantages:
 
@@ -67,7 +67,7 @@ RE|PARSE uses Regular Expressions which has some advantages:
 Limitations of RE|PARSE
 -------------------------
 
-Regular Expressionss have been known to catch input that was unexpected,
+Regular Expressions have been known to catch input that was unexpected,
 or miss input that was expected due to unforeseen edge cases.
 RE|PARSE provides tools to help alleviate this by checking the expressions against expected matching
 inputs, and against expected non-matching inputs.
