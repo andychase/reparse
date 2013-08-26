@@ -32,7 +32,7 @@ RE|PARSE needs 3 things in its operation:
 
 .. code-block:: python
 
-    {'my cool group': {'my cool expression': {'expression': [a-z]+}}}
+    {'my cool group': {'my cool expression': {'expression': '[a-z]+'}}}
 
 3. Patterns: A dictionary with Patterns (Dict) -> Pattern (String/Regex) (Ditto about the Yaml).
 
