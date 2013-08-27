@@ -17,7 +17,7 @@ Example Usage::
         def test_coolness(self):
             expression_tester(self, load_yaml("parse/cool/expressions.yaml"))
 """
-import re
+from reparse.config import expression_sub
 base_error_msg = "RE|PARSE Failure: In Ex Type {}, Group {}, "
 key_error_msg = base_error_msg + "Could not find Key {}"
 match_error_msg = base_error_msg + "Could not match {}"
@@ -42,8 +42,8 @@ def check_expression(testing_framework, expression_dict):
                                            key_error_msg.format(expression_type_name, name, key))
             for test in expression_object['Matches'].split('|'):
                 # Substitute and check to make sure that the entire string matches
-                result = re.sub(expression_object['Expression'], '', test.strip()) == ''
+                result = expression_sub(expression_object['Expression'], '', test.strip()) == ''
                 testing_framework.assertTrue(result, match_error_msg.format(expression_type_name, name, test))
             for test in expression_object['Non-Matches'].split('|'):
-                result = re.sub(expression_object['Expression'], '', test.strip()) == ''
+                result = expression_sub(expression_object['Expression'], '', test.strip()) == ''
                 testing_framework.assertFalse(result, non_match_error_msg.format(expression_type_name, name, test))

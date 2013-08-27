@@ -1,7 +1,5 @@
-import yaml
 from reparse.expression import Group, AlternatesGroup, Expression
-
-patterns_inside_patterns_depth = 10
+from reparse.config import pattern_max_recursion_depth
 
 
 class ExpressionGroupNotFound(Exception):
@@ -137,15 +135,17 @@ def build_all_from_dict(output_patterns, patterns_dict, expression_builder, func
             expression_builder.add_type(pat, name)
         except ExpressionGroupNotFound:
             extra[name] = pattern
-    if len(extra) > 0 and depth < patterns_inside_patterns_depth:
+    if len(extra) > 0 and depth < pattern_max_recursion_depth:
         # Recursive building for patterns inside of patterns
         build_all_from_dict(output_patterns, extra, expression_builder, function_builder, depth + 1)
-    elif depth >= patterns_inside_patterns_depth:
+    elif depth >= pattern_max_recursion_depth:
         raise ExpressionGroupNotFound()
     return output_patterns
 
 
 def build_from_yaml(functions_dict, expressions_path, patterns_path):
+    import yaml
+
     def load_yaml(file_path):
         with open(file_path) as f:
             return yaml.load(f)

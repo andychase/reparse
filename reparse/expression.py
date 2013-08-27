@@ -5,7 +5,7 @@ RE|PARSE's Regex Building Blocks
 This module handles building regex bits and grouping them together.
 The magic here is that expressions can be grouped as much as memory allows.
 """
-import regex
+from reparse.config import expression_compiler
 
 
 class Expression:
@@ -37,7 +37,7 @@ class Expression:
         """ Parse argument string
         """
         if self.compiled == "":
-            self.compiled = regex.compile(self.regex, regex.VERBOSE | regex.IGNORECASE)
+            self.compiled = expression_compiler(self.regex)
         matches = self.compiled.findall(string)
         output = []
         for match in matches:
