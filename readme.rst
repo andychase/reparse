@@ -1,7 +1,7 @@
 RE\|PARSE
 =========
 
-*Python library/tools for combining and using Regular Expressions in a maintainable way*
+*Python library/tools for combining and parsing using Regular Expressions in a maintainable way*
 
 [|Build Status| `Download/View Source on Github`_] [`Docs at ReadtheDocs`_]
 
@@ -11,13 +11,13 @@ This library also allows you to:
 - Combine them together using Patterns
 - Search, Parse and Output data matched by combined Regex using Python functions.
 
-If you know Regular Expressions already, this library basically just
-gives you a way to combine them together and hook them up to some callback functions in Python.
+This library basically just gives you a way to combine Regular Expressions together
+and hook them up to some callback functions in Python.
 
 A Taste / Getting Started
 =========================
 
-(See the examples/ directory for a full code example)
+(See the examples/ directory for a full code examples)
 
 Say your fashionista friend must know what colors their friends like at certain times.
 Luckily for you two, your friend's friends are blogging fanatics and you have downloaded thousands
@@ -37,9 +37,9 @@ First structure some Regular Expressions (Here, in Yaml)
 
     Color:
         Basic Color:
-            Expression: (Orange|Green)
+            Expression: (Red|Orange|Yellow|Green|Blue|Violet|Brown|Black)
             Matches: Orange | Green
-            Non-Matches: Blue
+            Non-Matches: White
             Groups:
               - Color
 
@@ -60,9 +60,9 @@ Then structure some Patterns with those expressions (Yaml)
     BasicColorTime:
       Order: 1
       Pattern: |
-        <Color> (?: \s? at \s? )? <Time>
-      # The stuff in angle brackets detonate expression groups.
-      # Multiple expressions in one group are combined together.
+        <Color> \s? at \s? <Time>
+      # Angle brackets detonate expression groups
+      # Multiple expressions in one group are combined together
 
 Some callback functions (in Python)
 ---------------------------

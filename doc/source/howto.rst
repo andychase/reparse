@@ -8,7 +8,7 @@ You will need
 #. A Python environment & some Regular Expression knowledge. Some resources: RegexOne_, Regex-Info_, W3Schools_.
 
 #. Some example texts that you will want to parse and their solutions.
-   This will be useful to check your parser and will help you put together the expressoins and patterns.
+   This will be useful to check your parser and will help you put together the expressions and patterns.
 
 1. Setup Python & RE|PARSE
 --------------------------
@@ -58,8 +58,8 @@ in many, many files. This is just how I organize my parsing resources.
 
 .. Tip::
 
-    You wanna know a dirty secret? I don't do all the hard work myself, I borrow Regexs off of other sites
-    such as http://regexlib.com/.
+    You wanna know a secret? I don't do all the hard work myself, I often borrow Regexs off other sites
+    like http://regexlib.com/.
 
 .. code-block:: yaml
 
@@ -174,7 +174,7 @@ The order in which the functions are run and results passed are as follows:
        'Fax Phone' : fax_phone
     }
 
-I used namedtuples here because I like them, but you can parse your output anyway you want to.
+I used namedtuples here, but you can parse your output anyway you want to.
 
 6. Combining it all together!
 -----------------------------
@@ -203,8 +203,8 @@ Here's how I'd put together my phone number parser:
                     highest_order = pattern.order
         return output
 
-    print parse(' +974-584-5656 ')
-    print parse(' Fax: +974-584-5656 ')
+    print parse('+974-584-5656')
+    print parse('Fax: +974-584-5656')
 
 Output:
 
@@ -216,10 +216,10 @@ Output:
 7. More info
 ------------
 
-Yeah, so this was all basically straight out of the examples/ directory
+Yeah, so this was all basically straight out of the examples/phone directory
 where you can run it yourself and see if it actually works.
 
-There's more (or at least one more) example in there to look at for more insight.
+There's more (or at least one more) example in there for further insight.
 
 Happy parsing!
 
