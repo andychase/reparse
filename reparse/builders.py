@@ -165,6 +165,85 @@ def build_from_yaml(functions_dict, expressions_path, patterns_path):
     return build_all_from_dict([], load_yaml(patterns_path), expression_builder, function_builder)
 
 
+def build_parser_from_yaml(functions_dict, expressions_path, patterns_path, with_name=False):
+    patterns = build_from_yaml(functions_dict, expressions_path, patterns_path)
+
+    def parse(line):
+        output = None
+        highest_order = 0
+        highest_pattern_name = None
+        for pattern in patterns:
+            results = pattern.findall(line)
+            if results and any(results):
+                if pattern.order > highest_order:
+                    output = results
+                    highest_order = pattern.order
+                    if with_name:
+                        highest_pattern_name = pattern.name
+        if with_name:
+            return output, highest_pattern_name
+        return output
+    return parse
+
+
+def alt_build_parser_from_yaml(functions_dict, expressions_path, patterns_path):
+    """
+    This parser is able to handle multiple different patterns
+    finding stuff in text-- while removing matches that overlap.
+    """
+    def overlapping(start1, end1, start2, end2):
+        """
+        >>> overlapping(0, 5, 6, 7)
+        False
+        >>> overlapping(1, 2, 0, 4)
+        True
+        >>> overlapping(5,6,0,5)
+        False
+        """
+        return not ((start1 <= start2 and start1 <= end2 and end1 <= end2 and end1 <= start2) or
+                    (start1 >= start2 and start1 >= end2 and end1 >= end2 and end1 >= start2))
+
+    def overlapping_at(start, end, current):
+        for current_index, (_, c_start, c_end) in enumerate(current):
+            if overlapping(c_start, c_end, start, end):
+                yield current_index
+
+    def remove_lower_overlapping(current, higher):
+        """
+        >>> remove_lower_overlapping([], [('a', 0, 5)])
+        [('a', 0, 5)]
+        >>> remove_lower_overlapping([('z', 0, 4)], [('a', 0, 5)])
+        [('a', 0, 5)]
+        >>> remove_lower_overlapping([('z', 5, 6)], [('a', 0, 5)])
+        [('z', 5, 6), ('a', 0, 5)]
+        """
+        for i, (match, h_start, h_end) in enumerate(higher):
+            overlaps = list(overlapping_at(h_start, h_end, current))
+            for overlap in overlaps:
+                del current[overlap]
+            if len(overlaps) > 0:
+                # Keeps order in place
+                current.insert(overlaps[0], (match, h_start, h_end))
+            else:
+                current.append((match, h_start, h_end))
+
+        return current
+
+    get_first = lambda items: [i[0] for i in items]
+    get_second = lambda items: [i[1] for i in items]
+
+    patterns = build_from_yaml(functions_dict, expressions_path, patterns_path)
+
+    def parse(line):
+        output = []
+        for pattern in patterns:
+            results = pattern.scan(line)
+            if results and any(results):
+                output.append((pattern.order, results))
+        return get_first(reduce(remove_lower_overlapping, get_second(sorted(output)), []))
+
+    return parse
+
 # Validators
 pattern_key_error = "Pattern [{}] does not contain the 'Pattern' key"
 expression_key_error = "Expression Type [{}] Expression [{}] does not contain the 'Expression' key"

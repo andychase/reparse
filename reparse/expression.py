@@ -9,7 +9,7 @@ from reparse.config import expression_compiler
 
 
 class Expression:
-    """ Expression is the fundamental unit of EX|PARSE.
+    """ Expression is the fundamental unit of RE|PARSE.
 
     It contains:
 
@@ -48,6 +48,13 @@ class Expression:
                 output.append(match)
         return output
 
+    def scan(self, string):
+        """ Like findall, but return start and ends
+        """
+        if self.compiled == "":
+            self.compiled = expression_compiler(self.regex)
+        return list(scanner_to_matches(self.compiled.scanner(string), self.run))
+
     def run(self, matches):
         """
         Given matches, which is the output of this class's regex
@@ -61,6 +68,26 @@ class Expression:
             results.append(self.group_functions[i](function_set))
             j += length - 1
         return self.final_function(results)
+
+
+def scanner_to_matches(scanner, processor):
+    for match in scanner:
+        groups = list(NoneToBlank(match.groups()))
+        result = processor(groups)
+        if result is None:
+            continue
+        elif type(result) is list:
+            yield [result, match.start(), match.end()]
+        else:
+            yield [[result], match.start(), match.end()]
+
+
+def NoneToBlank(arr):
+    for item in arr:
+        if item is None:
+            yield ''
+        else:
+            yield item
 
 
 def AlternatesGroup(expressions, final_function, name=""):
