@@ -1,5 +1,5 @@
-RE\|PARSE
-=========
+RE|PARSE
+========
 
 *Python library/tools for combining and parsing using Regular Expressions in a maintainable way*
 
@@ -65,7 +65,7 @@ Then structure some Patterns with those expressions (Yaml)
       # Multiple expressions in one group are combined together
 
 Some callback functions (in Python)
----------------------------
+-----------------------------------
 
 .. code-block:: python
 
