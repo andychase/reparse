@@ -82,9 +82,9 @@ class Expression_Builder(object):
     type_db = {}
 
     def __init__(self, expressions_dict, function_builder):
-        for expression_type, expressions in expressions_dict.iteritems():
+        for expression_type, expressions in expressions_dict.items():
             type_expressions = []
-            for name, expression in expressions.iteritems():
+            for name, expression in expressions.items():
                 groups = expression['Groups']
                 regex = expression['Expression']
                 lengths = [1] * len(groups)
@@ -118,7 +118,7 @@ def build_pattern(pattern_name, pattern_regex, expression_builder, function_buil
 
 def _build(output_patterns, patterns_dict, expression_builder, function_builder, depth=0):
     extra = {}
-    for name, pattern in patterns_dict.iteritems():
+    for name, pattern in patterns_dict.items():
         try:
             pat = build_pattern(name, pattern['Pattern'], expression_builder, function_builder)
             pat.order = int(pattern.get('Order', 0))

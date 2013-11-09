@@ -1,4 +1,5 @@
 from reparse.config import expression_compiler
+from functools import reduce
 
 
 class Expression(object):

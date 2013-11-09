@@ -4,15 +4,15 @@ expression_key_error = "Expression Type [{}] Expression [{}] does not contain th
 
 
 def valid_patterns_dict(patterns_dict):
-    for name, pattern in patterns_dict.iteritems():
+    for name, pattern in patterns_dict.items():
         if 'Pattern' not in pattern:
             return False, pattern_key_error.format(name)
     return True, ""
 
 
 def valid_expressions_dict(expressions_dict):
-    for expression_type_name, expression_type in expressions_dict.iteritems():
-        for name, _type in expression_type.iteritems():
+    for expression_type_name, expression_type in expressions_dict.items():
+        for name, _type in expression_type.items():
             if 'Expression' not in _type:
                 return False, expression_key_error.format(expression_type_name, name)
     return True, ""
