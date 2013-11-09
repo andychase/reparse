@@ -12,7 +12,7 @@ def readme_or_docstring():
 
         return reparse.__doc__
 
-setup(name='reparse',
+setup(name='Reparse',
       version='1.1',
       description='Sane Regular Expression based parsers',
       long_description=readme_or_docstring(),
