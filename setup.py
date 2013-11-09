@@ -22,10 +22,7 @@ setup(name='Reparse',
       download_url="https://github.com/asperous/reparse/archive/master.zip",
       license="MIT",
       packages=['reparse'],
-      install_requires=[
-          "regex",
-          "pyyaml",
-      ],
+      install_requires=["regex"],
       classifiers=(
           'Development Status :: 5 - Production/Stable',
           'Intended Audience :: Developers',

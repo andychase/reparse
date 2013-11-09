@@ -1,4 +1,4 @@
-from reparse import expression_compiler
+from reparse.config import expression_compiler
 
 
 class Expression(object):
@@ -50,6 +50,18 @@ class Expression(object):
                 yield group_function(matches[start_pos:end_pos])
                 group_starting_pos += group_length - 1
         return self.final_function(list(_run(matches)))
+
+    def build_full_tree(self):
+        return '{}|{}({})'.format(sum(self.group_lengths), self.final_function.__name__, ", ".join(self.build_tree()))
+
+    def build_tree(self):
+        for length, function in zip(self.group_lengths, self.group_functions):
+            if function.__name__ == 'run':
+                yield '{}|{}({})'.format(
+                    length, function.__self__.final_function.__name__, ", ".join(function.__self__.build_tree())
+                )
+            else:
+                yield '{}|{}()'.format(length, function.__name__)
 
     @staticmethod
     def _list_add(output, match):

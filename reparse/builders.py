@@ -1,3 +1,4 @@
+from reparse.config import pattern_max_recursion_depth
 from reparse.expression import Group, AlternatesGroup, Expression
 from reparse.util import separate_string
 
@@ -54,6 +55,7 @@ class Function_Builder(object):
             def func(_):
                 if any(_):
                     return _
+        func.__name__ = name
         return func
 
     def add_function(self, name, function):
@@ -113,3 +115,25 @@ def build_pattern(pattern_name, pattern_regex, expression_builder, function_buil
         expressions.append(expression)
     return Group(expressions, final_function, inbetweens, pattern_name)
 
+
+def _build(output_patterns, patterns_dict, expression_builder, function_builder, depth=0):
+    extra = {}
+    for name, pattern in patterns_dict.iteritems():
+        try:
+            pat = build_pattern(name, pattern['Pattern'], expression_builder, function_builder)
+            pat.order = int(pattern.get('Order', 0))
+            output_patterns.append(pat)
+            expression_builder.add_type(pat, name)
+        except ExpressionGroupNotFound:
+            extra[name] = pattern
+    if len(extra) > 0 and depth < pattern_max_recursion_depth:
+        # Recursive building for patterns inside of patterns
+        return _build(output_patterns, extra, expression_builder, function_builder, depth + 1)
+    elif depth >= pattern_max_recursion_depth:
+        raise ExpressionGroupNotFound()
+    return output_patterns
+
+
+def build_all(patterns, expressions, functions):
+    function_builder = Function_Builder(functions)
+    return _build([], patterns, Expression_Builder(expressions, function_builder), function_builder)

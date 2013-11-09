@@ -1,9 +1,21 @@
+# Patterns: weave the regex expression groups together
+
 Basic Phone:
     Pattern: <Phone>
     Order: 1
 
 Fax Phone:
+    # Pattern: Also a regular expression
+    # Angle brackets tag such as <Class> contains the Expression class you want there
+    # Each class contains one or more groups |ed together.
+
     Pattern: |
       Fax: \s <Phone>
+
+    # Order: If you have multiple patterns, you can use this field to 'weight' them
+    # For example, if you have 3 matching patterns, the most complex one
+    # Is the one you probably want, so put the highest number in Order: on that one.
     Order: 2
-    # I could have used <Basic Phone> instead to use a pattern inside a pattern but it wouldn't have made a difference really (just an extra function call).
+
+    # I could have used <Basic Phone> instead to use a pattern inside a pattern but
+    # it wouldn't have made a difference really (just an extra function call).

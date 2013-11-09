@@ -1,4 +1,4 @@
-# Use the smaller bits of regex to build dynamic regex patterns
+# Patterns: weave the regex expression groups together
 
 BasicColorTime:
   # Order: If you have multiple patterns, you can use this field to 'weight' them

@@ -1,8 +1,8 @@
 """
-This file contains the parsing functions related to patterns
+This file contains the parsing functions related to parsers
 
-The point is that each function can take in a result list and
-   use custom logic to parse a meaningful date group from it.
+The point is that each function can take in part of the results and
+use custom logic to parse a meaningful output from it.
 """
 
 from datetime import time
@@ -19,14 +19,14 @@ def color_time(Color=None, Time=None):
 
 # --------------- Function list ------------------
 # This is the dictionary that is used by the RE|PARSE
-# expression builder. The key is the same key used in the patterns.yaml
-# file for Function: ~~~. The value is the function.
+# expression builder. The key is the same value used in the patterns.yaml
+# file under ``Function: ``. The value is a reference to function.
 
-# Defining functions at each level is often more useful,
-#   but there is a catch-all function to save time.
+# Defining functions at each level is often useful,
+# but there are default functions to save time.
 
-# This has to go last so that the functions are actually defined
-# in Python when we get build this.
+# This has to go last in this file so that the functions are
+# actually defined in Python when we get to this point.
 functions = {
     # Groups
     # Expressions

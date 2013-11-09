@@ -1,8 +1,14 @@
+""" Example of a phone number parser
+>>> phone_parser('+974-584-5656')
+[phone(area_code='974', prefix='584', body='5656', fax=False)]
+>>> phone_parser('Fax: +974-584-5656')
+[phone(area_code='974', prefix='584', body='5656', fax=True)]
+"""
+# Example stuff -----------------------------------------------------
+# Have to add the parent directory just in case you
+# run this file in the demo directory without installing RE|PARSE
 import sys
 sys.path.append('../..')
-
-from functions import functions
-import reparse
 
 # If file was imported, include that path
 path = ""
@@ -12,28 +18,19 @@ if '__file__' in globals():
     if path:
         path += "/"
 
-patterns_path = path + "patterns.yaml"
-expressions_path = path + "expressions.yaml"
-patterns = reparse.build_from_yaml(functions, expressions_path, patterns_path)
 
+# RE|PARSE ----------------------------------------------------------
+from examples.phone.functions import functions
+import reparse
 
-def parse(line):
-    """
-    >>> parse('+974-584-5656')
-    [phone(area_code='974', prefix='584', body='5656', fax=False)]
-    >>> parse('Fax: +974-584-5656')
-    [phone(area_code='974', prefix='584', body='5656', fax=True)]
-    """
-    output = None
-    highest_order = 0
-    for pattern in patterns:
-        results = pattern.findall(line)
-        if results and any(results):
-            if pattern.order > highest_order:
-                output = results
-                highest_order = pattern.order
-    return output
+phone_parser = reparse.parser(
+    parser_type=reparse.basic_parser,
+    expressions_yaml_path=path + "expressions.yaml",
+    patterns_yaml_path=path + "patterns.yaml",
+    functions=functions
+)
+
 
 if __name__ == "__main__":
-    print parse(' +974-584-5656 ')
-    print parse(' Fax: +974-584-5656 ')
+    print phone_parser(' +974-584-5656 ')
+    print phone_parser(' Fax: +974-584-5656 ')
