@@ -359,9 +359,6 @@ h2
     z-index: -2;
     padding: 0;
     text-shadow: none;
-    color: transparent;
-    background: url('reparse.png') no-repeat;
-    background-size: contain;
 }
 
 #re-parse h1 a

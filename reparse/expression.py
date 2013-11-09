@@ -1,30 +1,19 @@
-"""
-RE|PARSE's Regex Building Blocks
+from reparse import expression_compiler
 
 
-This module handles building regex bits and grouping them together.
-The magic here is that expressions can be grouped as much as memory allows.
-"""
-from reparse.config import expression_compiler
+class Expression(object):
+    """ Expressions are the building blocks of parsers.
 
+    Each contains:
 
-class Expression:
-    """ Expression is the fundamental unit of RE|PARSE.
+    - A regex pattern (lazily compiled on first usage)
+    - Group lengths, functions and names
+    - a ``final_function``
 
-    It contains:
-
-    - The finalized regex,
-    - the compiled regex (lazily compiled on the first run),
-    - Group lengths, functions and names,
-    - and the output ``final_function``
-
+    When an expression runs with ``findall`` or ``scan``,
+    it matches a string using its regex, and returns the
+    results from the parsing functions.
     """
-    regex = ""
-    compiled = ""
-    group_lengths = []
-    group_functions = []
-    group_names = []
-    final_function = ""
 
     def __init__(self, regex, functions, group_lengths, final_function, name=""):
         self.regex = regex
@@ -32,66 +21,67 @@ class Expression:
         self.group_lengths = group_lengths
         self.final_function = final_function
         self.name = name
+        self.compiled = False
+
+    def ensure_compiled(self):
+        if not self.compiled:
+            self.compiled = expression_compiler(self.regex)
 
     def findall(self, string):
-        """ Parse argument string
+        """ Parse string, returning all outputs as parsed by functions
         """
-        if self.compiled == "":
-            self.compiled = expression_compiler(self.regex)
-        matches = self.compiled.findall(string)
-        output = []
-        for match in matches:
-            match = self.run(match)
-            if type(match) is list:
-                output.extend(match)
-            else:
-                output.append(match)
-        return output
+        self.ensure_compiled()
+        return reduce(lambda output, match: self._list_add(output, self.run(match)), self.compiled.findall(string), [])
 
     def scan(self, string):
-        """ Like findall, but return start and ends
+        """ Like findall, but also returning matching start and end string locations
         """
-        if self.compiled == "":
-            self.compiled = expression_compiler(self.regex)
-        return list(scanner_to_matches(self.compiled.scanner(string), self.run))
+        self.ensure_compiled()
+        return list(self._scanner_to_matches(self.compiled.scanner(string), self.run))
 
     def run(self, matches):
+        """ Run group functions over matches
         """
-        Given matches, which is the output of this class's regex
-        execute functions & parse.
-        """
-        j = 0
-        results = []
-        for i in range(0, len(self.group_functions)):
-            length = self.group_lengths[i]
-            function_set = matches[(i + j):(i + j + length)]
-            results.append(self.group_functions[i](function_set))
-            j += length - 1
-        return self.final_function(results)
+        def _run(matches):
+            group_starting_pos = 0
+            for current_pos, (group_length, group_function) in enumerate(zip(self.group_lengths, self.group_functions)):
+                start_pos = current_pos + group_starting_pos
+                end_pos = current_pos + group_starting_pos + group_length
+                yield group_function(matches[start_pos:end_pos])
+                group_starting_pos += group_length - 1
+        return self.final_function(list(_run(matches)))
 
-
-def scanner_to_matches(scanner, processor):
-    for match in scanner:
-        groups = list(NoneToBlank(match.groups()))
-        result = processor(groups)
-        if result is None:
-            continue
-        elif type(result) is list:
-            yield [result, match.start(), match.end()]
+    @staticmethod
+    def _list_add(output, match):
+        if type(match) is list:
+            output.extend(match)
         else:
-            yield [[result], match.start(), match.end()]
+            output.append(match)
+        return output
 
+    @staticmethod
+    def _scanner_to_matches(scanner, processor):
+        none_to_blank = lambda _: '' if _ is None else _
 
-def NoneToBlank(arr):
-    for item in arr:
-        if item is None:
-            yield ''
-        else:
-            yield item
+        for match in scanner:
+            result = processor(map(none_to_blank, match.groups()))
+            if result is None:
+                continue
+            elif type(result) is list:
+                yield [result, match.start(), match.end()]
+            else:
+                yield [[result], match.start(), match.end()]
 
 
 def AlternatesGroup(expressions, final_function, name=""):
-    """ Group expressions using the OR regex (``|``)
+    """ Group expressions using the OR character ``|``
+    >>> from collections import namedtuple
+    >>> expr = namedtuple('expr', 'regex group_lengths run')('(1)', [1], None)
+    >>> grouping = AlternatesGroup([expr, expr], lambda f: None, 'yeah')
+    >>> grouping.regex
+    '(?:(1))|(?:(1))'
+    >>> grouping.group_lengths
+    [1, 1]
     """
     inbetweens = ["|"] * (len(expressions) + 1)
     inbetweens[0] = ""

@@ -7,7 +7,9 @@ import reparse
 path = ""
 if '__file__' in globals():
     import os
-    path = str(os.path.dirname(__file__)) + "/"
+    path = str(os.path.dirname(__file__))
+    if path:
+        path += "/"
 
 patterns_path = path + "patterns.yaml"
 expressions_path = path + "expressions.yaml"
