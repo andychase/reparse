@@ -184,34 +184,21 @@ Here's how I'd put together my phone number parser:
 
 .. code-block:: python
 
-    from functions import functions
+    from examples.phone.functions import functions
     import reparse
 
-    patterns_path = "patterns.yaml"
-    expressions_path = "expressions.yaml"
-    patterns = reparse.build_from_yaml(functions, expressions_path, patterns_path)
+    phone_parser = reparse.parser(
+        parser_type=reparse.basic_parser,
+        expressions_yaml_path=path + "expressions.yaml",
+        patterns_yaml_path=path + "patterns.yaml",
+        functions=functions
+    )
 
 
-    def parse(line):
-        output = None
-        highest_order = 0
-        for pattern in patterns:
-            results = pattern.findall(line)
-            if results and any(results):
-                if pattern.order > highest_order:
-                    output = results
-                    highest_order = pattern.order
-        return output
-
-    print(parse('+974-584-5656'))
-    print(parse('Fax: +974-584-5656'))
-
-Output:
-
-.. code-block:: python
-
-    [phone(area_code='974', prefix='584', body='5656', fax=False)]
-    [phone(area_code='974', prefix='584', body='5656', fax=True)]
+    print(phone_parser('+974-584-5656'))
+    # => [phone(area_code='974', prefix='584', body='5656', fax=False)]
+    print(phone_parser('Fax: +974-584-5656'))
+    # => [phone(area_code='974', prefix='584', body='5656', fax=True)]
 
 7. More info
 ------------

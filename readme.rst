@@ -78,6 +78,24 @@ Some callback functions (in Python)
 
         return Color, Time
 
+Build your parser
+-----------------
+
+.. code-block:: python
+
+    from examples.colortime.functions import functions
+    import reparse
+
+
+    colortime_parser = reparse.parser(
+        parser_type=reparse.basic_parser,
+        expressions_yaml_path=path + "expressions.yaml",
+        patterns_yaml_path=path + "patterns.yaml",
+        functions=functions
+    )
+
+    print(colortime_parser("~ ~ ~ go to the store ~ buy green at 11pm! ~ ~"))
+
 Result
 ------
 
