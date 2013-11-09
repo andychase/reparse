@@ -1,4 +1,4 @@
 """ RE|PARSE
 """
 
-from parsers import *
+from reparse.parsers import *
