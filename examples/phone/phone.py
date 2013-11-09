@@ -32,5 +32,5 @@ phone_parser = reparse.parser(
 
 
 if __name__ == "__main__":
-    print phone_parser(' +974-584-5656 ')
-    print phone_parser(' Fax: +974-584-5656 ')
+    print(phone_parser(' +974-584-5656 '))
+    print(phone_parser(' Fax: +974-584-5656 '))

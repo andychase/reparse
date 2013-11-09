@@ -30,4 +30,4 @@ colortime_parser = reparse.parser(
 )
 
 if __name__ == "__main__":
-    print colortime_parser("~ ~ ~ go to the store ~ buy green at 11pm! ~ ~")
+    print(colortime_parser("~ ~ ~ go to the store ~ buy green at 11pm! ~ ~"))

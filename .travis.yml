@@ -3,7 +3,8 @@ python:
   - 2.7
   - 3.3
 install:
-  - pip install pyyaml
+  - pip install --use-mirrors pyyaml
+  - pip install --use-mirrors -r requirements.txt
 script: nosetests --with-doctest
 notifications:
   email: false

@@ -203,8 +203,8 @@ Here's how I'd put together my phone number parser:
                     highest_order = pattern.order
         return output
 
-    print parse('+974-584-5656')
-    print parse('Fax: +974-584-5656')
+    print(parse('+974-584-5656'))
+    print(parse('Fax: +974-584-5656'))
 
 Output:
 
