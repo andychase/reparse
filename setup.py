@@ -13,7 +13,7 @@ def readme_or_docstring():
         return reparse.__doc__
 
 setup(name='Reparse',
-      version='1.1',
+      version='2.0',
       description='Sane Regular Expression based parsers',
       long_description=readme_or_docstring(),
       author='Andy Chase',
@@ -30,6 +30,7 @@ setup(name='Reparse',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python',
           'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3.3',
           'Topic :: Software Development :: Libraries :: Python Modules',
           'Topic :: Text Processing'
       ),

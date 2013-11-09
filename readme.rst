@@ -154,6 +154,13 @@ Contribution
 The code is located on Github_.
 Send me suggestions, issues, and pull requests and I'll gladly review them!
 
+Versions
+--------
+
+- *2.0* Major Refactor, Python 3, Better Parser builders
+- *1.1* Fix setup.py
+- *1.0* Release
+
 Licence
 -------
 
