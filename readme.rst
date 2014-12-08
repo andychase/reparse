@@ -187,12 +187,12 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-.. |Build Status| image:: https://travis-ci.org/asperous/reparse.png?branch=master
-   :target: https://travis-ci.org/asperous/reparse
+.. |Build Status| image:: https://travis-ci.org/andychase/reparse.png?branch=master
+   :target: https://travis-ci.org/andychase/reparse
 
-.. _Download/View Source on Github: https://github.com/asperous/reparse
+.. _Download/View Source on Github: https://github.com/andychase/reparse
 
-.. _Github: https://github.com/asperous/reparse
+.. _Github: https://github.com/andychase/reparse
 
 .. _Docs at Readthedocs: https://reparse.readthedocs.org/en/latest/
 
@@ -204,4 +204,4 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 .. _`PyYaml`: https://pypi.python.org/pypi/PyYAML
 
-.. _`Zip off of Github`: https://github.com/asperous/reparse/archive/master.zip
+.. _`Zip off of Github`: https://github.com/andychase/reparse/archive/master.zip
