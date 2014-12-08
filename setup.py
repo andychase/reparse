@@ -13,13 +13,13 @@ def readme_or_docstring():
         return reparse.__doc__
 
 setup(name='Reparse',
-      version='2.0',
+      version='2.01',
       description='Sane Regular Expression based parsers',
       long_description=readme_or_docstring(),
       author='Andy Chase',
-      author_email='andy@asperous.us',
-      url='http://github.com/asperous/reparse',
-      download_url="https://github.com/asperous/reparse/archive/master.zip",
+      author_email='theandychase@gmail.com',
+      url='http://github.com/andychase/reparse',
+      download_url="https://github.com/andychase/reparse/archive/master.zip",
       license="MIT",
       packages=['reparse'],
       install_requires=["regex"],
