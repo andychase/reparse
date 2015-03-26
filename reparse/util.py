@@ -1,9 +1,11 @@
-def separate_string(string, start_delimiter, end_delimiter):
+import regex
+
+def separate_string(string):
     """
-    >>> separate_string("test (2)", "(", ")")
+    >>> separate_string("test <2>")
     (['test ', ''], ['2'])
     """
-    string_list = string.replace(end_delimiter, start_delimiter).split(start_delimiter)
+    string_list = regex.split(r'<(?![!=])', regex.sub(r'>', '<', string))
     return string_list[::2], string_list[1::2]  # Returns even and odd elements
 
 
