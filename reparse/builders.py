@@ -107,7 +107,7 @@ class Expression_Builder(object):
 
 def build_pattern(pattern_name, pattern_regex, expression_builder, function_builder):
     final_function = function_builder.get_function(pattern_name, "pattern")
-    inbetweens, expression_names = separate_string(pattern_regex, "<", ">")
+    inbetweens, expression_names = separate_string(pattern_regex)
     expressions = []
     for name in expression_names:
         expression = expression_builder.get_type(name)
