@@ -15,3 +15,9 @@ BasicColorTime:
   # Note: You can use patterns in other patterns such as:
   # Pattern: <BasicColorTime>!+?
   # Function: Excited Color Time
+
+OnlyColor:
+  # This tests a pattern with only one expression
+  Order: 2
+  Pattern: |
+    Crazy \s 2pm \s <Color>

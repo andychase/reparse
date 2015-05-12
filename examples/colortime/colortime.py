@@ -1,6 +1,12 @@
-""" Example from docs
+""" Example from docs:
+
 >>> colortime_parser("~ ~ ~ go to the store ~ buy green at 11pm! ~ ~")
 [('green', datetime.time(23, 0))]
+
+In this case the processing functions weren't specified but you
+still get a useful result as a default.
+>>> colortime_parser("~ ~ ~ Crazy 2pm green ~ ~")
+[['green']]
 """
 # Example stuff -----------------------------------------------------
 # Have to add the parent directory just in case you

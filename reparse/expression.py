@@ -32,7 +32,12 @@ class Expression(object):
         """ Parse string, returning all outputs as parsed by functions
         """
         self.ensure_compiled()
-        return reduce(lambda output, match: self._list_add(output, self.run(match)), self.compiled.findall(string), [])
+        output = []
+        for match in self.compiled.findall(string):
+            if isinstance(match, str):
+                match = [match]
+            self._list_add(output, self.run(match))
+        return output
 
     def scan(self, string):
         """ Like findall, but also returning matching start and end string locations
