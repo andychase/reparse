@@ -75,7 +75,7 @@ def parser(parser_type=basic_parser, functions=None, patterns=None, expressions=
     def _load_yaml(file_path):
         import yaml
         with open(file_path) as f:
-            return yaml.load(f)
+            return yaml.safe_load(f)
 
     assert expressions or expressions_yaml_path, "RE|PARSE can't build a parser without expressions"
     assert patterns or patterns_yaml_path, "RE|PARSE can't build a parser without patterns"
