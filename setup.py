@@ -22,7 +22,10 @@ setup(name='reparse',
       download_url='https://github.com/andychase/reparse/archive/master.zip',
       license='MIT',
       packages=['reparse'],
-      install_requires=['regex'],
+      install_requires=[
+          'regex',
+          'pyyaml',
+      ],
       classifiers=(
           'Development Status :: 5 - Production/Stable',
           'Intended Audience :: Developers',
