@@ -37,7 +37,7 @@ def remove_lower_overlapping(current, higher):
     >>> remove_lower_overlapping([('z', 5, 6)], [('a', 0, 5)])
     [('z', 5, 6), ('a', 0, 5)]
     """
-    for i, (match, h_start, h_end) in enumerate(higher):
+    for (match, h_start, h_end) in higher:
         overlaps = list(overlapping_at(h_start, h_end, current))
         for overlap in overlaps:
             del current[overlap]

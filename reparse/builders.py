@@ -82,7 +82,7 @@ class Expression_Builder(object):
 
     def __init__(self, expressions_dict, function_builder):
         self.type_db = {}
-        
+
         for expression_type, expressions in expressions_dict.items():
             type_expressions = []
             for name, expression in expressions.items():
