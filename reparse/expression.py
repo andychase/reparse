@@ -24,16 +24,17 @@ class Expression(object):
         self.name = name
         self.compiled = False
 
-    def ensure_compiled(self):
+    @property
+    def pattern(self):
         if not self.compiled:
             self.compiled = expression_compiler(self.regex)
+        return self.compiled
 
     def findall(self, string):
         """ Parse string, returning all outputs as parsed by functions
         """
-        self.ensure_compiled()
         output = []
-        for match in self.compiled.findall(string):
+        for match in self.pattern.findall(string):
             if isinstance(match, str):
                 match = [match]
             self._list_add(output, self.run(match))
@@ -42,8 +43,7 @@ class Expression(object):
     def scan(self, string):
         """ Like findall, but also returning matching start and end string locations
         """
-        self.ensure_compiled()
-        return list(self._scanner_to_matches(self.compiled.scanner(string), self.run))
+        return list(self._scanner_to_matches(self.pattern.scanner(string), self.run))
 
     def run(self, matches):
         """ Run group functions over matches
