@@ -23,9 +23,7 @@ class Expression(object):
             self.regex_error = regex_error
 
         def __str__(self):
-            return '%{self.regex_error} in "{self.pattern}" pattern'.format(
-                self=self
-            )
+            return '%{0.regex_error} in "{0.pattern}" pattern'.format(self)
 
     def __init__(self, regex, functions, group_lengths, final_function, name=""):
         self.regex = regex
