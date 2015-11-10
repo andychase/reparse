@@ -1,3 +1,5 @@
+import regex
+
 from reparse.config import expression_compiler
 
 
@@ -15,6 +17,16 @@ class Expression(object):
     results from the parsing functions.
     """
 
+    class InvalidPattern(Exception):
+        def __init__(self, pattern, regex_error):
+            self.pattern = pattern
+            self.regex_error = regex_error
+
+        def __str__(self):
+            return '%{self.regex_error} in "{self.pattern}" pattern'.format(
+                self=self
+            )
+
     def __init__(self, regex, functions, group_lengths, final_function, name=""):
         self.regex = regex
         self.group_functions = functions
@@ -26,7 +38,10 @@ class Expression(object):
     @property
     def pattern(self):
         if not self.compiled:
-            self.compiled = expression_compiler(self.regex)
+            try:
+                self.compiled = expression_compiler(self.regex)
+            except regex.error as e:
+                raise self.InvalidPattern(self.regex, e)
         return self.compiled
 
     def findall(self, string):
