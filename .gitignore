@@ -2,6 +2,7 @@
 .coverage
 .idea/*
 .tox/
+TAGS
 dist/*
 doc/build/*
 doc/html/*
