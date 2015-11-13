@@ -19,6 +19,7 @@ class Expression(object):
 
     class InvalidPattern(Exception):
         def __init__(self, pattern, regex_error):
+            super(Expression.InvalidPattern, self).__init__()
             self.pattern = pattern
             self.regex_error = regex_error
 
