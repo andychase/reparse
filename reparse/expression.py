@@ -96,8 +96,8 @@ def AlternatesGroup(expressions, final_function, name=""):
     >>> from collections import namedtuple
     >>> expr = namedtuple('expr', 'regex group_lengths run')('(1)', [1], None)
     >>> grouping = AlternatesGroup([expr, expr], lambda f: None, 'yeah')
-    >>> grouping.regex
-    '(?:(1))|(?:(1))'
+    >>> print(grouping.regex)
+    (?:(1))|(?:(1))
     >>> grouping.group_lengths
     [1, 1]
     """
