@@ -71,16 +71,16 @@ class Expression(object):
         return self.final_function(list(_run(matches)))
 
     def build_full_tree(self):
-        return '{}|{}({})'.format(sum(self.group_lengths), self.final_function.__name__, ", ".join(self.build_tree()))
+        return u'{}|{}({})'.format(sum(self.group_lengths), self.final_function.__name__, u", ".join(self.build_tree()))
 
     def build_tree(self):
         for length, function in zip(self.group_lengths, self.group_functions):
             if function.__name__ == 'run':
-                yield '{}|{}({})'.format(
-                    length, function.__self__.final_function.__name__, ", ".join(function.__self__.build_tree())
+                yield u'{}|{}({})'.format(
+                    length, function.__self__.final_function.__name__, u", ".join(function.__self__.build_tree())
                 )
             else:
-                yield '{}|{}()'.format(length, function.__name__)
+                yield u'{}|{}()'.format(length, function.__name__)
 
     @staticmethod
     def _list_add(output, match):
@@ -109,8 +109,8 @@ def AlternatesGroup(expressions, final_function, name=""):
     >>> from collections import namedtuple
     >>> expr = namedtuple('expr', 'regex group_lengths run')('(1)', [1], None)
     >>> grouping = AlternatesGroup([expr, expr], lambda f: None, 'yeah')
-    >>> grouping.regex
-    '(?:(1))|(?:(1))'
+    >>> print(grouping.regex)
+    (?:(1))|(?:(1))
     >>> grouping.group_lengths
     [1, 1]
     """
@@ -125,7 +125,7 @@ def Group(expressions, final_function, inbetweens, name=""):
     """
     lengths = []
     functions = []
-    regex = ""
+    regex = u""
     i = 0
     for expression in expressions:
         regex += inbetweens[i]

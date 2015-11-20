@@ -1,6 +1,6 @@
 # Validators
-pattern_key_error = "Pattern [{}] does not contain the 'Pattern' key"
-expression_key_error = "Expression Type [{}] Expression [{}] does not contain the 'Expression' key"
+pattern_key_error = u"Pattern [{}] does not contain the 'Pattern' key"
+expression_key_error = u"Expression Type [{}] Expression [{}] does not contain the 'Expression' key"
 
 
 def valid_patterns_dict(patterns_dict):
