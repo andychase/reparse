@@ -16,9 +16,9 @@ Example Usage::
             expression_tester(self, load_yaml("parse/cool/expressions.yaml"))
 """
 from reparse.config import expression_sub
-base_error_msg = "Expression Type [{}], Group [{}], "
-match_error_msg = base_error_msg + "Could not match [{}]"
-non_match_error_msg = base_error_msg + "Should not match [{}]"
+base_error_msg = u"Expression Type [{}], Group [{}], "
+match_error_msg = base_error_msg + u"Could not match [{}]"
+non_match_error_msg = base_error_msg + u"Should not match [{}]"
 
 
 def check_expression(testing_framework, expression_dict):
