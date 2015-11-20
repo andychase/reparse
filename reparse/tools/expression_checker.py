@@ -8,12 +8,12 @@ contains assertIn, assertTrue, assertFalse (such as unittest).
 
 Example Usage::
 
-    from reparse.expression_tester import expression_tester
+    from reparse.tools.expression_checker import check_expression
     import unittest
 
-    class cool_test(unittest.Unittest):
+    class cool_test(unittest.TestCase):
         def test_coolness(self):
-            expression_tester(self, load_yaml("parse/cool/expressions.yaml"))
+            check_expression(self, load_yaml("parse/cool/expressions.yaml"))
 """
 from reparse.config import expression_sub
 base_error_msg = u"Expression Type [{}], Group [{}], "
