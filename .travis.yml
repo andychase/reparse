@@ -6,7 +6,7 @@ python:
   - 3.4
 install:
   - pip install --use-mirrors pyyaml
-  - pip install --use-mirrors -r requirements.txt
-script: nosetests --with-doctest
+  - pip install --use-mirrors -r requirements-dev.txt
+script: nosetests
 notifications:
   email: false
