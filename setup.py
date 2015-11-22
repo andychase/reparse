@@ -24,8 +24,7 @@ setup(name='reparse',
       packages=['reparse'],
       install_requires=[
           'regex',
-          'pyyaml',
-          'future',
+          'pyyaml'
       ],
       classifiers=(
           'Development Status :: 5 - Production/Stable',

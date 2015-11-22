@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 import regex
-from past.builtins import basestring
 from reparse.config import get_expression_compiler
 
 
@@ -50,7 +49,7 @@ class Expression(object):
         """
         output = []
         for match in self.pattern.findall(string):
-            if isinstance(match, basestring):
+            if hasattr(match, 'strip'):
                 match = [match]
             self._list_add(output, self.run(match))
         return output
