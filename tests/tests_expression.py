@@ -1,5 +1,9 @@
+from __future__ import unicode_literals
+import regex
 from unittest import TestCase
 from reparse.expression import AlternatesGroup, Expression
+from reparse import config
+
 
 class TestExpression(TestCase):
 
@@ -45,3 +49,51 @@ class TestExpression(TestCase):
 
         grouped_expressions = AlternatesGroup([exp, exp2], final)
         self.assertEquals(grouped_expressions.findall("hi"), ["hi"])
+        
+        
+class TestCustomFlags(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._regex_flags = config.regex_flags
+        
+    @classmethod
+    def tearDownClass(cls):
+        config.regex_flags = cls._regex_flags
+        
+    def test_unicode_flag(self):
+        def uni_match(input):
+            def func(uni_match):
+                return uni_match
+            return func(*input)
+
+        def final(input):
+            return input
+
+        config.regex_flags = config.regex_flags | regex.UNICODE
+        
+        imp_regex = "(\w+)"
+        implicit_u = Expression(imp_regex, [uni_match], [1], final)
+        self.assertEquals(implicit_u.findall("b\xebs"), ["b\xebs"])
+        
+        exp_regex = "([\u00c0-\ud7ff]+)"
+        explicit_u = Expression(exp_regex, [uni_match], [1], final)
+        self.assertEquals(explicit_u.findall("b\u00eb\u2013s"), ["\u00eb\u2013"])
+        
+    def test_case_sensitivity(self):
+        def uni_match(input):
+            def func(uni_match):
+                return uni_match
+            return func(*input)
+
+        def final(input):
+            return input
+
+        config.regex_flags = regex.VERBOSE
+        
+        lower_regex = "([a-z]+)"
+        lower_exp = Expression(lower_regex, [uni_match], [1], final)
+        self.assertEquals(lower_exp.findall("aAbcBC"), ["a", "bc"])
+        
+        upper_regex = "([A-Z]+)"
+        upper_exp = Expression(upper_regex, [uni_match], [1], final)
+        self.assertEquals(upper_exp.findall("aAbcBC"), ["A", "BC"])
