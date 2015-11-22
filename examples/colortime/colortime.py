@@ -11,7 +11,7 @@ still get a useful result as a default.
 """
 # Example stuff -----------------------------------------------------
 # Have to add the parent directory just in case you
-# run this file in the demo directory without installing RE|PARSE
+# run this file in the demo directory without installing Reparse
 import sys
 sys.path.append('../..')
 
@@ -24,7 +24,7 @@ if '__file__' in globals():
         path += "/"
 
 
-# RE|PARSE ----------------------------------------------------------
+# Reparse ----------------------------------------------------------
 from examples.colortime.functions import functions
 import reparse
 

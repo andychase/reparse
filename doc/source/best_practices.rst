@@ -13,7 +13,7 @@ they can have a long productive life without getting out of control:
 - Never let a regex become too big to be easily understood. Split up big regex
   into smaller expressions. (Sensible splits won't hurt them).
 - Maintain a Matches and Non-Matches
-    - RE|PARSE can use this to test your Regex to make sure they are matching properly
+    - Reparse can use this to test your Regex to make sure they are matching properly
     - It helps maintainers see which regular expressions match what quickly
     - It helps show your intention with each expression, so that others can confidently improve or modify them
 - Maintain a description which talks about what you are trying to match with each regex,

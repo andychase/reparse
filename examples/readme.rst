@@ -1,4 +1,4 @@
-These examples shows a very basic RE|PARSE setup to help you get started.
+These examples shows a very basic Reparse setup to help you get started.
 Under each directory there are files like this::
 
     expressions.yaml -- Contains the regular expression building blocks

@@ -1,7 +1,7 @@
 About: Why another tool for parsing?
 ====================================
 
-RE|PARSE is simply a tool for combining regular expressions together
+Reparse is simply a tool for combining regular expressions together
 and using a regular expression engine to scan/search/parse/process input for certain tasks.
 
 Larger parsing tools like YACC/Bison, ANTLR, and others are really
@@ -9,27 +9,27 @@ good for structured input like computer code or xml. They aren't specifically
 designed for scanning and parsing semi-structured data from unstructured
 text (like books, or internet documents, or diaries).
 
-RE|PARSE is designed to work with exactly that kind of stuff, (and is completely
+Reparse is designed to work with exactly that kind of stuff, (and is completely
 useless for the kinds of tasks any of the above is often used for).
 
 Parsing Spectrum
 ----------------
 
-RE|PARSE isn't the first parser of it's kind. A hypothetical spectrum
+Reparse isn't the first parser of it's kind. A hypothetical spectrum
 of parsers from pattern-finding only
 all the way to highly-featured, structured grammars might look something like this::
 
-                    v- RE|PARSE            v- YACC/Bison
+                    v- Reparse            v- YACC/Bison
     UNSTRUCTURED |-------------------------| STRUCTURED
                  ^- Regex     ^- Parboiled/PyParsing
 
-RE|PARSE is in fact very featureless. It's only a little better
+Reparse is in fact very featureless. It's only a little better
 than plain regular expressions. Still, you might find it ideal
 for the kinds of tasks it was designed to deal with (like dates and addresses).
 
 
-What kind of things might RE|PARSE be useful for parsing?
----------------------------------------------------------
+What kind of things might Reparse be useful for parsing?
+--------------------------------------------------------
 
 Any kind of semi-structured formats:
 
@@ -41,17 +41,17 @@ Any kind of semi-structured formats:
 - Addresses
 - Phone numbers
 
-Or in other words, anything you might consider parsing with Regex, might consider RE|PARSE,
+Or in other words, anything you might consider parsing with Regex, might consider Reparse,
 especially if you are considering combining multiple regular expressions together.
 
 Why Regular Expressions
---------------------------------
+-----------------------
 
 PyParsing (Python) and Parboiled (JVM) also have use-cases very similar
-to RE|PARSE, and they are much more feature-filled. They have their own (much more powerful)
+to Reparse, and they are much more feature-filled. They have their own (much more powerful)
 DSL for parsing text.
 
-RE|PARSE uses Regular Expressions which has some advantages:
+Reparse uses Regular Expressions which has some advantages:
 
 - Short, minimal Syntax
 - Universal (with some minor differences between different engines)
@@ -59,20 +59,20 @@ RE|PARSE uses Regular Expressions which has some advantages:
 - Moderately Easy-to-learn (Though this is highly subjective)
     - Many programmers already know the basics
     - Skills can be carried else where
-- **Regular Expressions can be harvested elsewhere and used within RE|PARSE**
+- **Regular Expressions can be harvested elsewhere and used within Reparse**
 - Decent performance over large inputs
 - Ability to use fuzzy matching regex engines
 
 
-Limitations of RE|PARSE
--------------------------
+Limitations of Reparse
+----------------------
 
 Regular Expressions have been known to catch input that was unexpected,
 or miss input that was expected due to unforeseen edge cases.
-RE|PARSE provides tools to help alleviate this by checking the expressions against expected matching
+Reparse provides tools to help alleviate this by checking the expressions against expected matching
 inputs, and against expected non-matching inputs.
 
 This library is very limited in what it can parse, if you realize
 you need something like a recursive grammar, you might want to try PyParsing or something greater
-(though RE|PARSE might be helpful as a 'first step' matching and transforming the parse-able data before it is properly
+(though Reparse might be helpful as a 'first step' matching and transforming the parse-able data before it is properly
 parsed by a different library).
