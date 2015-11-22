@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import regex
-
-from reparse.config import expression_compiler
+from past.builtins import basestring
+from reparse.config import get_expression_compiler
 
 
 class Expression(object):
@@ -34,12 +34,13 @@ class Expression(object):
         self.final_function = final_function
         self.name = name
         self.compiled = False
+        self.expression_compiler = get_expression_compiler()
 
     @property
     def pattern(self):
         if not self.compiled:
             try:
-                self.compiled = expression_compiler(self.regex)
+                self.compiled = self.expression_compiler(self.regex)
             except regex.error as e:
                 raise self.InvalidPattern(self.regex, e)
         return self.compiled
@@ -49,7 +50,7 @@ class Expression(object):
         """
         output = []
         for match in self.pattern.findall(string):
-            if isinstance(match, str):
+            if isinstance(match, basestring):
                 match = [match]
             self._list_add(output, self.run(match))
         return output

@@ -16,7 +16,7 @@ Example Usage::
             check_expression(self, load_yaml("parse/cool/expressions.yaml"))
 """
 from __future__ import unicode_literals
-from reparse.config import expression_sub
+from reparse.config import get_expression_sub
 base_error_msg = "Expression Type [{}], Group [{}], "
 match_error_msg = base_error_msg + "Could not match [{}]"
 non_match_error_msg = base_error_msg + "Should not match [{}]"
@@ -33,6 +33,8 @@ def check_expression(testing_framework, expression_dict):
     >>> check_expression(mock_framework(),
     ...   {'class': {'group' :{'Matches': " 0 | 1", 'Non-Matches': "2 | 0 2", 'Expression': "[0-1]"}}})
     """
+    expression_sub = get_expression_sub()
+    
     for expression_type_name, expression_type in expression_dict.items():
         for name, expression_object in expression_type.items():
             if 'Matches' in expression_object.keys():
