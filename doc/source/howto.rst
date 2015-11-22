@@ -1,5 +1,5 @@
-Howto: How to use RE|PARSE
-==========================
+Howto: How to use Reparse
+=========================
 
 
 You will need
@@ -10,15 +10,15 @@ You will need
 #. Some example texts that you will want to parse and their solutions.
    This will be useful to check your parser and will help you put together the expressions and patterns.
 
-1. Setup Python & RE|PARSE
---------------------------
+1. Setup Python & Reparse
+-------------------------
 
-See :ref:`installation-howto` for instructions on how to install RE|PARSE
+See :ref:`installation-howto` for instructions on how to install Reparse
 
-2. Layout of an example RE|PARSE parser
--------------------------------------
+2. Layout of an example Reparse parser
+--------------------------------------
 
-RE|PARSE needs 3 things in its operation:
+Reparse needs 3 things in its operation:
 
 1. Functions: A dictionary with String Key -> Function Value mapping.
 
@@ -113,7 +113,7 @@ in expressions and merely *combined* in patterns.
         Order: 2
         # I could have used <Basic Phone> instead to use a pattern inside a pattern but it wouldn't have made a difference really (just an extra function call).
 
-The order field tells RE|PARSE which pattern to pick if multiple patterns match.
+The order field tells Reparse which pattern to pick if multiple patterns match.
 Generally speaking, the more specific patterns should be ordered higher than the lower ones
 (you wouldn't want someone to try and call a fax machine!).
 
@@ -129,9 +129,9 @@ Done this way, I could have had 3 different formats for Area Code and the patter
 on any of them. I didn't here because that'd be overkill for phone numbers.
 
 5. Writing your functions.py file
-----------------------------------
+---------------------------------
 
-RE|PARSE matches text and also does some parsing using functions.
+Reparse matches text and also does some parsing using functions.
 
 The order in which the functions are run and results passed are as follows:
 
@@ -179,7 +179,7 @@ I used namedtuples here, but you can parse your output anyway you want to.
 6. Combining it all together!
 -----------------------------
 
-The builder.py module contains some functions to build a RE|PARSE system together.
+The builder.py module contains some functions to build a Reparse system together.
 Here's how I'd put together my phone number parser:
 
 .. code-block:: python

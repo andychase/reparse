@@ -1,4 +1,4 @@
-Here lies the embedded docblock documentation for the various parts of RE|PARSE.
+Here lies the embedded docblock documentation for the various parts of Reparse.
 
 expression
 =========

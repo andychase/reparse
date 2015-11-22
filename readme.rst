@@ -1,5 +1,5 @@
-RE|PARSE
-========
+Reparse
+=======
 
 *Python library/tools for combining and parsing using Regular Expressions in a maintainable way*
 
@@ -28,7 +28,7 @@ So you want to get (color and time) or ``[('green', datetime.time(23, 0))]`` out
      blah blah blah go to the store to buy green at 11pm! blah blah
 
 If you need scan/search/parse/transform some unstructured input and get some semi-structured data
-out of it RE|PARSE might be able to help.
+out of it Reparse might be able to help.
 
 First structure some Regular Expressions (Here, in Yaml)
 --------------------------------------------------------
@@ -105,9 +105,9 @@ Result
 
 Cool!
 
-Intrigued? Learn more how to make the magic happen in `Howto: How to use RE|PARSE`_.
+Intrigued? Learn more how to make the magic happen in `Howto: How to use Reparse`_.
 
-Want to read more about what RE|PARSE is and what it can do? More info in `About: Why another tool for parsing?`_
+Want to read more about what Reparse is and what it can do? More info in `About: Why another tool for parsing?`_
 
 Info
 ====
@@ -127,7 +127,7 @@ manually
 ~~~~~~~~
 
 1. If you don't have them already,
-   RE|PARSE depends on REGEX_, and PyYaml_.
+   Reparse depends on REGEX_, and PyYaml_.
    Download those and ``python setup.py install`` in their directories.
    If you are on windows, you may have to find binary installers for these, since they
    contain modules that have to be compiled.
@@ -146,7 +146,7 @@ manually
 Support
 -------
 
-Need some help? Send me an email at asperous2@gmail.com and I'll do my best to help you.
+Need some help? Send me an email at theandychase@gmail.com and I'll do my best to help you.
 
 Contribution
 ------------
@@ -157,6 +157,7 @@ Send me suggestions, issues, and pull requests and I'll gladly review them!
 Versions
 --------
 
+- *3.0* InvalidPattern Exception, Allow monkey patching regex arguments. RE|PARSE -> Reparse.
 - *2.1* Change `yaml.load` to `yaml.safe_load` for security
 - *2.0* Major Refactor, Python 3, Better Parser builders
 - *1.1* Fix setup.py
@@ -176,7 +177,7 @@ MIT Licensed! See LICENSE file for the full text.
 
 .. _Docs at Readthedocs: https://reparse.readthedocs.org/en/latest/
 
-.. _`Howto: How to use RE|PARSE`: https://reparse.readthedocs.org/en/latest/howto.html
+.. _`Howto: How to use Reparse`: https://reparse.readthedocs.org/en/latest/howto.html
 
 .. _`About: Why another tool for parsing?`: https://reparse.readthedocs.org/en/latest/about.html
 

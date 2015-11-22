@@ -18,7 +18,7 @@ def color_time(Color=None, Time=None):
     return Color, Time
 
 # --------------- Function list ------------------
-# This is the dictionary that is used by the RE|PARSE
+# This is the dictionary that is used by the Reparse
 # expression builder. The key is the same value used in the patterns.yaml
 # file under ``Function: ``. The value is a reference to function.
 

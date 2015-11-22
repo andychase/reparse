@@ -1,5 +1,6 @@
-from reparse.config import expression_compiler
-from functools import reduce
+from __future__ import unicode_literals
+import regex
+from reparse.config import get_expression_compiler
 
 
 class Expression(object):
@@ -16,6 +17,15 @@ class Expression(object):
     results from the parsing functions.
     """
 
+    class InvalidPattern(Exception):
+        def __init__(self, pattern, regex_error):
+            super(Expression.InvalidPattern, self).__init__()
+            self.pattern = pattern
+            self.regex_error = regex_error
+
+        def __str__(self):
+            return '%{0.regex_error} in "{0.pattern}" pattern'.format(self)
+
     def __init__(self, regex, functions, group_lengths, final_function, name=""):
         self.regex = regex
         self.group_functions = functions
@@ -23,18 +33,23 @@ class Expression(object):
         self.final_function = final_function
         self.name = name
         self.compiled = False
+        self.expression_compiler = get_expression_compiler()
 
-    def ensure_compiled(self):
+    @property
+    def pattern(self):
         if not self.compiled:
-            self.compiled = expression_compiler(self.regex)
+            try:
+                self.compiled = self.expression_compiler(self.regex)
+            except regex.error as e:
+                raise self.InvalidPattern(self.regex, e)
+        return self.compiled
 
     def findall(self, string):
         """ Parse string, returning all outputs as parsed by functions
         """
-        self.ensure_compiled()
         output = []
-        for match in self.compiled.findall(string):
-            if isinstance(match, str):
+        for match in self.pattern.findall(string):
+            if hasattr(match, 'strip'):
                 match = [match]
             self._list_add(output, self.run(match))
         return output
@@ -42,8 +57,7 @@ class Expression(object):
     def scan(self, string):
         """ Like findall, but also returning matching start and end string locations
         """
-        self.ensure_compiled()
-        return list(self._scanner_to_matches(self.compiled.scanner(string), self.run))
+        return list(self._scanner_to_matches(self.pattern.scanner(string), self.run))
 
     def run(self, matches):
         """ Run group functions over matches
@@ -96,7 +110,7 @@ def AlternatesGroup(expressions, final_function, name=""):
     >>> from collections import namedtuple
     >>> expr = namedtuple('expr', 'regex group_lengths run')('(1)', [1], None)
     >>> grouping = AlternatesGroup([expr, expr], lambda f: None, 'yeah')
-    >>> grouping.regex
+    >>> grouping.regex  # doctest: +IGNORE_UNICODE
     '(?:(1))|(?:(1))'
     >>> grouping.group_lengths
     [1, 1]

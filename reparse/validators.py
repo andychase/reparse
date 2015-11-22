@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 # Validators
 pattern_key_error = "Pattern [{}] does not contain the 'Pattern' key"
 expression_key_error = "Expression Type [{}] Expression [{}] does not contain the 'Expression' key"

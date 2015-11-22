@@ -1,12 +1,13 @@
+from __future__ import unicode_literals
 """ Example of a phone number parser
->>> phone_parser('+974-584-5656')
+>>> phone_parser('+974-584-5656')  # doctest: +IGNORE_UNICODE
 [phone(area_code='974', prefix='584', body='5656', fax=False)]
->>> phone_parser('Fax: +974-584-5656')
+>>> phone_parser('Fax: +974-584-5656')  # doctest: +IGNORE_UNICODE
 [phone(area_code='974', prefix='584', body='5656', fax=True)]
 """
 # Example stuff -----------------------------------------------------
 # Have to add the parent directory just in case you
-# run this file in the demo directory without installing RE|PARSE
+# run this file in the demo directory without installing Reparse
 import sys
 sys.path.append('../..')
 
@@ -19,7 +20,7 @@ if '__file__' in globals():
         path += "/"
 
 
-# RE|PARSE ----------------------------------------------------------
+# Reparse ----------------------------------------------------------
 from examples.phone.functions import functions
 import reparse
 

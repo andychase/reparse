@@ -1,6 +1,9 @@
 *.pyc
+.coverage
 .idea/*
+.tox/
+TAGS
+dist/*
 doc/build/*
 doc/html/*
-MANIFEST
-dist/*
+reparse.egg-info/

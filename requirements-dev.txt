@@ -1,0 +1,4 @@
+-r requirements.txt
+nose
+doctest-ignore-unicode
+pyyaml

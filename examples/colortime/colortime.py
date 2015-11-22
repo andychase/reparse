@@ -1,16 +1,17 @@
+from __future__ import unicode_literals
 """ Example from docs:
 
->>> colortime_parser("~ ~ ~ go to the store ~ buy green at 11pm! ~ ~")
+>>> colortime_parser("~ ~ ~ go to the store ~ buy green at 11pm! ~ ~")  # doctest: +IGNORE_UNICODE
 [('green', datetime.time(23, 0))]
 
 In this case the processing functions weren't specified but you
 still get a useful result as a default.
->>> colortime_parser("~ ~ ~ Crazy 2pm green ~ ~")
+>>> colortime_parser("~ ~ ~ Crazy 2pm green ~ ~")  # doctest: +IGNORE_UNICODE
 [['green']]
 """
 # Example stuff -----------------------------------------------------
 # Have to add the parent directory just in case you
-# run this file in the demo directory without installing RE|PARSE
+# run this file in the demo directory without installing Reparse
 import sys
 sys.path.append('../..')
 
@@ -23,7 +24,7 @@ if '__file__' in globals():
         path += "/"
 
 
-# RE|PARSE ----------------------------------------------------------
+# Reparse ----------------------------------------------------------
 from examples.colortime.functions import functions
 import reparse
 
