@@ -146,7 +146,7 @@ manually
 Support
 -------
 
-Need some help? Send me an email at asperous2@gmail.com and I'll do my best to help you.
+Need some help? Send me an email at theandychase@gmail.com and I'll do my best to help you.
 
 Contribution
 ------------
@@ -157,6 +157,7 @@ Send me suggestions, issues, and pull requests and I'll gladly review them!
 Versions
 --------
 
+- *3.0* InvalidPattern Exception, Allow monkey patching regex arguments
 - *2.1* Change `yaml.load` to `yaml.safe_load` for security
 - *2.0* Major Refactor, Python 3, Better Parser builders
 - *1.1* Fix setup.py
