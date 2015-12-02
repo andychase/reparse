@@ -168,7 +168,7 @@ Licence
 
 MIT Licensed! See LICENSE file for the full text.
 
-.. |Build Status| image:: https://travis-ci.org/andychase/reparse.png?branch=master
+.. |Build Status| image:: https://travis-ci.org/andychase/reparse.svg?branch=master
    :target: https://travis-ci.org/andychase/reparse
 
 .. _Download/View Source on Github: https://github.com/andychase/reparse
