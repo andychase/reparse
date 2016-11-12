@@ -8,6 +8,6 @@ python:
   - 3.5
 install:
   - pip install -r requirements-dev.txt
-script: nosetests
+script: nosetests -c nose.cfg
 notifications:
   email: false
