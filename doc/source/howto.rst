@@ -152,7 +152,7 @@ The order in which the functions are run and results passed are as follows:
     Phone = namedtuple('phone', 'area_code prefix body fax')
 
 
-    def senthill(AreaCode, Prefix, Body):
+    def senthill((AreaCode, Prefix, Body):
         return Phone(area_code=AreaCode, prefix=Prefix, body=Body, fax=False)
 
 
@@ -165,7 +165,7 @@ The order in which the functions are run and results passed are as follows:
 
 
     def fax_phone(p):
-        return p._replace(fax=True)
+        return p[0]._replace(fax=True)
 
     functions = {
        'Senthil Gunabalan' : senthill,
